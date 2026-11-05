@@ -781,6 +781,8 @@ function toggleMobileDrawer(e) {
 window.openMobileDrawer = openMobileDrawer;
 window.closeMobileDrawer = closeMobileDrawer;
 window.toggleMobileDrawer = toggleMobileDrawer;
+window.openDrawer = openMobileDrawer;
+window.closeDrawer = closeMobileDrawer;
 
 function initNavbar() {
   const hamburger = document.getElementById("hamburger-btn");
@@ -802,7 +804,7 @@ function initNavbar() {
 
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && drawer && drawer.classList.contains("open")) {
-      closeDrawer();
+      closeMobileDrawer(e);
     }
   });
 
@@ -811,7 +813,7 @@ function initNavbar() {
     drawer.querySelectorAll(".nav-link, .mobile-drawer-footer a, .mobile-drawer-footer button").forEach(link => {
       link.addEventListener("click", () => {
         // give brief delay if navigating so transition is smooth
-        setTimeout(closeDrawer, 100);
+        setTimeout(() => closeMobileDrawer(), 100);
       });
     });
   }
