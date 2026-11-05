@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Pharmacist and Administrator portal for Stackly pharmacy operations.">
+  <title>Admin & Pharmacist Portal — Stackly Pharmacy</title>
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    .admin-table th {
+      background: var(--surface-muted);
+      text-align: left;
+      padding: 12px 14px;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      border-bottom: 2px solid var(--border-light);
+    }
+    .admin-table td {
+      padding: 14px;
+      border-bottom: 1px solid var(--border-light);
+      vertical-align: middle;
+    }
+    .admin-table tr:hover {
+      background: var(--teal-surface);
+    }
+    .modal-form-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .modal-form-grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 14px;
+    }
+    @media (max-width: 576px) {
+      .modal-form-grid-2,
+      .modal-form-grid-3 {
+        grid-template-columns: 1fr !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <div class="disclaimer-top-bar" style="background:#042f2e;">
+    <span class="tag" style="background:#14b8a6;">Pharmacist Administrator Session</span>
+    <span>Good Pharmacy Practice (GPP) Certified Dispensary Console</span>
+  </div>
+
+  <!-- Admin Console Header -->
+  <header class="auth-minimal-header">
+    <div class="dashboard-container" style="display:flex;align-items:center;justify-content:space-between;height:72px;">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <a href="admin-dashboard.html" class="brand-logo" aria-label="Stackly Admin Dashboard">
+          <img src="assets/images/stackly-logo.webp" alt="Stackly" class="navbar-brand-img">
+        </a>
+        <span class="portal-badge" style="font-size:0.75rem;background:var(--teal-surface);color:var(--teal-primary);padding:3px 10px;border-radius:4px;border:1px solid var(--teal-border);font-weight:700;">Admin Console</span>
+      </div>
+
+      <div class="auth-header-actions" style="display:flex;align-items:center;gap:10px;">
+        <a href="products.html" class="btn btn-outline-dark btn-sm portal-action-btn" title="View Storefront Catalog">
+          <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+          <span class="portal-btn-text">Store Catalog</span>
+        </a>
+
+        <!-- Hamburger Button -->
+        <button id="hamburger-btn" class="hamburger-btn" onclick="toggleMobileDrawer(event)" aria-label="Toggle navigation drawer" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Backdrop & Drawer -->
+  <div id="mobile-backdrop" class="mobile-nav-backdrop" onclick="closeMobileDrawer(event)"></div>
+  <aside id="mobile-drawer" class="mobile-nav-drawer" aria-label="Mobile Navigation Drawer">
+    <div class="mobile-drawer-header">
+      <a href="admin-dashboard.html" class="brand-logo" aria-label="Stackly Admin Dashboard">
+        <img src="assets/images/stackly-logo.webp" alt="Stackly" class="navbar-brand-img">
+      </a>
+      <button id="mobile-drawer-close" class="mobile-drawer-close" onclick="closeMobileDrawer(event)" aria-label="Close Navigation Menu">&times;</button>
+    </div>
+    <div class="mobile-drawer-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About Us</a>
+      <a href="medicines.html" class="nav-link">Medicines</a>
+      <a href="categories.html" class="nav-link">Categories</a>
+      <a href="products.html" class="nav-link">Healthcare Products</a>
+      <a href="offers.html" class="nav-link">Offers</a>
+      <a href="prescription-upload.html" class="nav-link nav-link-rx">Upload Prescription</a>
+      <a href="contact.html" class="nav-link">Contact Us</a>
+      <a href="my-orders.html" class="nav-link">My Orders</a>
+      <a href="user-dashboard.html" class="nav-link">User Dashboard</a>
+      <a href="admin-dashboard.html" class="nav-link active">Admin Dashboard</a>
+    </div>
+    <div class="mobile-drawer-footer">
+      <button onclick="Store.logout()" class="btn btn-outline-danger btn-block" style="margin-bottom:8px;">Sign Out</button>
+      <a href="products.html" class="btn btn-primary btn-block">Storefront Catalog</a>
+    </div>
+  </aside>
+
+  <main id="main-content" style="padding: 32px 0 80px 0;">
+    <div class="dashboard-container">
+      <div class="dashboard-layout">
+        
+        <!-- SIDEBAR -->
+        <aside class="dashboard-sidebar" aria-label="Admin Navigation">
+          <div class="dashboard-user-card">
+            <strong style="display:block;font-size:0.95rem;">Dr. Marcus Reed (RPh)</strong>
+            <span style="font-size:0.75rem;color:var(--text-muted);">Lead Pharmacist • Reg #PH-99214</span>
+          </div>
+
+          <nav>
+            <div class="dashboard-nav-item active" onclick="switchAdminTab('overview', this)">
+              <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+              <span>Dashboard Overview</span>
+            </div>
+
+            <div class="dashboard-nav-item" onclick="switchAdminTab('products', this)">
+              <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+              <span>Manage Products</span>
+            </div>
+
+            <div class="dashboard-nav-item" onclick="switchAdminTab('rx-queue', this)">
+              <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+              <span>Prescription Audit Queue</span>
+            </div>
+
+            <div class="dashboard-nav-item" onclick="switchAdminTab('orders', this)">
+              <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+              <span>Manage Orders</span>
+            </div>
+
+            <div class="dashboard-nav-item" onclick="switchAdminTab('inventory', this)">
+              <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+              <span>Stock & Alerts</span>
+            </div>
+
+            <div class="dashboard-nav-item dashboard-nav-signout" onclick="Store.logout()">
+              <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+              <span>Sign Out</span>
+            </div>
+          </nav>
+        </aside>
+
+        <!-- CONTENT PANELS -->
+        <div>
+          
+          <!-- TAB 1: OVERVIEW -->
+          <div id="adm-overview" class="dashboard-content-panel active">
+            <h1 style="font-size:1.6rem;font-weight:800;margin-bottom:20px;">Pharmacy Operations Overview</h1>
+            
+            <div class="stat-grid">
+              <div class="stat-card">
+                <div class="stat-icon">
+                  <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+                </div>
+                <div>
+                  <div class="stat-number" id="adm-count-products">24</div>
+                  <div class="stat-label">Catalog Products</div>
+                </div>
+              </div>
+
+              <div class="stat-card">
+                <div class="stat-icon" style="background:#fff1f2;color:var(--rx-red);">
+                  <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                </div>
+                <div>
+                  <div class="stat-number" id="adm-count-rx-pending">1</div>
+                  <div class="stat-label">Pending Rx Audits</div>
+                </div>
+              </div>
+
+              <div class="stat-card">
+                <div class="stat-icon" style="background:var(--blue-light);color:var(--blue-accent);">
+                  <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+                </div>
+                <div>
+                  <div class="stat-number" id="adm-count-orders">2</div>
+                  <div class="stat-label">Active Orders</div>
+                </div>
+              </div>
+
+              <div class="stat-card">
+                <div class="stat-icon" style="background:#fef3c7;color:#d97706;">
+                  <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                </div>
+                <div>
+                  <div class="stat-number" id="adm-count-lowstock">3</div>
+                  <div class="stat-label">Low Stock Alerts</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Urgent Queue Notice -->
+            <div style="background:#fff1f2;border:1px solid #fecdd3;border-radius:var(--radius-lg);padding:20px;margin-bottom:28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+              <div>
+                <strong style="color:#9f1239;font-size:1rem;display:flex;align-items:center;gap:6px;">
+                  <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                  Pharmacist Prescription Review Required
+                </strong>
+                <p style="font-size:0.875rem;color:#9f1239;margin-top:2px;">There are pending customer prescriptions awaiting doctor verification.</p>
+              </div>
+              <button class="btn btn-rx btn-sm" onclick="switchAdminTab('rx-queue')">Open Rx Queue &rarr;</button>
+            </div>
+          </div>
+
+          <!-- TAB 2: MANAGE PRODUCTS -->
+          <div id="adm-products" class="dashboard-content-panel">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:12px;">
+              <h2 style="font-size:1.4rem;font-weight:800;">Catalog Management</h2>
+              <button class="btn btn-primary btn-sm" onclick="openAddProductModal()">+ Add New Product</button>
+            </div>
+
+            <div class="table-scroll-hint">
+              <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+              <span>Swipe horizontally to view full table</span>
+            </div>
+            <div class="admin-table-wrapper">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Rx Rule</th>
+                    <th>Stock</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="adm-products-tbody">
+                  <!-- Populated by JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- TAB 3: PRESCRIPTION REVIEW QUEUE -->
+          <div id="adm-rx-queue" class="dashboard-content-panel">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:10px;">
+              <h2 style="font-size:1.4rem;font-weight:800;">Prescription Audit Queue</h2>
+              <span class="badge badge-teal">Pharmacist Station</span>
+            </div>
+
+            <div class="table-scroll-hint">
+              <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+              <span>Swipe horizontally to view full table</span>
+            </div>
+            <div class="admin-table-wrapper">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Ref ID</th>
+                    <th>Patient Name</th>
+                    <th>File</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="adm-rx-tbody">
+                  <!-- Populated by JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- TAB 4: MANAGE ORDERS -->
+          <div id="adm-orders" class="dashboard-content-panel">
+            <h2 style="font-size:1.4rem;font-weight:800;margin-bottom:20px;">Pharmacy Orders</h2>
+
+            <div class="table-scroll-hint">
+              <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+              <span>Swipe horizontally to view full table</span>
+            </div>
+            <div class="admin-table-wrapper">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Order ID</th>
+                    <th>Customer</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <th>Change Status</th>
+                  </tr>
+                </thead>
+                <tbody id="adm-orders-tbody">
+                  <!-- Populated by JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- TAB 5: INVENTORY & STOCK ALERTS -->
+          <div id="adm-inventory" class="dashboard-content-panel">
+            <h2 style="font-size:1.4rem;font-weight:800;margin-bottom:20px;">Inventory & Stock Levels</h2>
+            
+            <div class="table-scroll-hint">
+              <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+              <span>Swipe horizontally to view full table</span>
+            </div>
+            <div class="admin-table-wrapper">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Product Name</th>
+                    <th>Current Quantity</th>
+                    <th>Status</th>
+                    <th>Adjust Units</th>
+                  </tr>
+                </thead>
+                <tbody id="adm-inventory-tbody">
+                  <!-- Populated by JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- ADD / EDIT PRODUCT MODAL -->
+  <div id="product-modal" class="modal-backdrop">
+    <div class="modal-box" style="max-width:580px;">
+      <div class="modal-header">
+        <h3 id="modal-product-title" style="font-size:1.2rem;font-weight:800;">Add New Healthcare Product</h3>
+        <button onclick="closeProductModal()" style="font-size:1.4rem;">&times;</button>
+      </div>
+      <form id="product-form" onsubmit="handleProductSubmit(event)">
+        <div class="modal-body">
+          <input type="hidden" id="p-id">
+          
+          <div class="form-group">
+            <label class="form-label">Product Name *</label>
+            <input type="text" id="p-name" class="form-control" required placeholder="e.g. Zincovit Multivitamin Tablets">
+          </div>
+
+          <div class="modal-form-grid-2">
+            <div class="form-group">
+              <label class="form-label">Brand *</label>
+              <input type="text" id="p-brand" class="form-control" required placeholder="e.g. Apex Health">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Category *</label>
+              <select id="p-cat" class="form-control" required>
+                <option value="Medicines">Medicines</option>
+                <option value="Vitamins and Nutrition">Vitamins and Nutrition</option>
+                <option value="Medical Devices">Medical Devices</option>
+                <option value="First Aid">First Aid</option>
+                <option value="Skin Care">Skin Care</option>
+                <option value="Baby Care">Baby Care</option>
+                <option value="Oral Care">Oral Care</option>
+                <option value="Wellness Products">Wellness Products</option>
+                <option value="Personal Care">Personal Care</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="modal-form-grid-3">
+            <div class="form-group">
+              <label class="form-label">Price ($) *</label>
+              <input type="number" id="p-price" class="form-control" step="0.01" min="0.5" required placeholder="14.99">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Original ($)</label>
+              <input type="number" id="p-orig" class="form-control" step="0.01" min="0" placeholder="18.00">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Stock Units *</label>
+              <input type="number" id="p-stock" class="form-control" min="0" required placeholder="50">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="filter-checkbox-label">
+              <input type="checkbox" id="p-rx">
+              <span style="font-weight:700;color:var(--rx-red);">Requires Valid Doctor's Prescription (Rx Only)</span>
+            </label>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Description & Dosage Guidelines</label>
+            <textarea id="p-desc" class="form-control" rows="2" placeholder="Clinical formulation summary..."></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark btn-sm" onclick="closeProductModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary btn-sm">Save Product</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+  <script>
+    function switchAdminTab(name, el) {
+      document.querySelectorAll(".dashboard-nav-item").forEach(item => {
+        item.classList.remove("active");
+        const onclickAttr = item.getAttribute("onclick") || "";
+        if (onclickAttr.includes(`'${name}'`)) {
+          item.classList.add("active");
+          if (typeof item.scrollIntoView === "function" && window.innerWidth <= 768) {
+            item.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+          }
+        }
+      });
+      if (el && el.classList.contains("dashboard-nav-item")) {
+        el.classList.add("active");
+        if (typeof el.scrollIntoView === "function" && window.innerWidth <= 768) {
+          el.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+        }
+      }
+
+      document.querySelectorAll(".dashboard-content-panel").forEach(p => p.classList.remove("active"));
+      const target = document.getElementById(`adm-${name}`);
+      if (target) target.classList.add("active");
+
+      if (typeof window.closeMobileDrawer === "function") {
+        window.closeMobileDrawer();
+      }
+    }
+
+    function renderAdminDashboard() {
+      const products = getStoredProducts();
+      const prescriptions = Store.getPrescriptions();
+      const orders = Store.getOrders();
+
+      const pendingRx = prescriptions.filter(r => r.status === "Pending Review").length;
+      const lowStock = products.filter(p => p.stockCount <= 40).length;
+
+      document.getElementById("adm-count-products").textContent = products.length;
+      document.getElementById("adm-count-rx-pending").textContent = pendingRx;
+      document.getElementById("adm-count-orders").textContent = orders.length;
+      document.getElementById("adm-count-lowstock").textContent = lowStock;
+
+      // Render Products Table
+      const prodTbody = document.getElementById("adm-products-tbody");
+      prodTbody.innerHTML = products.map(p => `
+        <tr>
+          <td>
+            <div style="display:flex;align-items:center;gap:10px;">
+              <img src="${p.image}" alt="${p.name}" style="width:36px;height:36px;object-fit:contain;background:#f8fafc;border-radius:4px;">
+              <div>
+                <strong>${p.name}</strong>
+                <div style="font-size:0.75rem;color:var(--text-muted);">${p.brand}</div>
+              </div>
+            </div>
+          </td>
+          <td>${p.category}</td>
+          <td><strong>$${p.price.toFixed(2)}</strong></td>
+          <td>${p.requiresRx ? '<span class="badge badge-rx">Rx Required</span>' : '<span class="badge badge-green">OTC</span>'}</td>
+          <td><strong>${p.stockCount}</strong></td>
+          <td>
+            <button class="btn btn-sm btn-outline-dark" onclick="editProduct('${p.id}')">Edit</button>
+            <button class="btn btn-sm" style="color:var(--rx-red);" onclick="deleteProduct('${p.id}')">Delete</button>
+          </td>
+        </tr>
+      `).join('');
+
+      // Render Rx Table
+      const rxTbody = document.getElementById("adm-rx-tbody");
+      rxTbody.innerHTML = prescriptions.map(r => `
+        <tr>
+          <td><strong style="color:var(--teal-primary);">${r.id}</strong></td>
+          <td>
+            <strong>${r.patientName}</strong>
+            <div style="font-size:0.75rem;color:var(--text-muted);">${r.phone}</div>
+          </td>
+          <td>${r.fileName} (${r.fileSize})</td>
+          <td><span class="badge ${r.status === 'Verified' ? 'badge-green' : 'badge-amber'}">${r.status}</span></td>
+          <td>
+            ${r.status === 'Pending Review' ? `
+              <button class="btn btn-sm btn-success" onclick="approveRx('${r.id}')">Approve Rx</button>
+              <button class="btn btn-sm" style="color:var(--rx-red);" onclick="rejectRx('${r.id}')">Reject</button>
+            ` : '<span style="color:var(--green-dark);font-weight:700;">Audited ✓</span>'}
+          </td>
+        </tr>
+      `).join('');
+
+      // Render Orders Table
+      const ordersTbody = document.getElementById("adm-orders-tbody");
+      ordersTbody.innerHTML = orders.map(o => `
+        <tr>
+          <td><strong>${o.orderId}</strong></td>
+          <td>${o.customerName}</td>
+          <td><strong>$${o.total.toFixed(2)}</strong></td>
+          <td><span class="badge ${o.status === 'Delivered' ? 'badge-green' : 'badge-blue'}">${o.status}</span></td>
+          <td>
+            <select onchange="updateOrderStatus('${o.orderId}', this.value)" style="padding:4px 8px;border-radius:4px;border:1px solid var(--border-light);font-size:0.8rem;">
+              <option value="Processing" ${o.status === 'Processing' ? 'selected' : ''}>Processing</option>
+              <option value="Awaiting Rx Approval" ${o.status === 'Awaiting Rx Approval' ? 'selected' : ''}>Awaiting Rx Approval</option>
+              <option value="Dispatched" ${o.status === 'Dispatched' ? 'selected' : ''}>Dispatched</option>
+              <option value="Delivered" ${o.status === 'Delivered' ? 'selected' : ''}>Delivered</option>
+            </select>
+          </td>
+        </tr>
+      `).join('');
+
+      // Render Inventory Table
+      const invTbody = document.getElementById("adm-inventory-tbody");
+      invTbody.innerHTML = products.map(p => `
+        <tr>
+          <td><strong>${p.name}</strong></td>
+          <td><strong style="font-size:1rem;">${p.stockCount} units</strong></td>
+          <td>
+            ${p.stockCount <= 40 
+              ? '<span class="badge badge-rx">Low Stock Alert</span>' 
+              : '<span class="badge badge-green">Healthy</span>'}
+          </td>
+          <td>
+            <button class="btn btn-sm btn-outline-dark" onclick="adjustStock('${p.id}', -10)">-10</button>
+            <button class="btn btn-sm btn-outline-dark" onclick="adjustStock('${p.id}', 25)">+25</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function approveRx(id) {
+      const rxList = Store.getPrescriptions();
+      const item = rxList.find(r => r.id === id);
+      if (item) {
+        item.status = "Verified";
+        item.pharmacistNotes = "Verified by Pharmacist Dr. Marcus Reed (Reg #PH-99214). Approved for dispensing.";
+        Store.savePrescriptions(rxList);
+        showToast(`Prescription ${id} verified and approved!`, "success");
+        renderAdminDashboard();
+      }
+    }
+
+    function rejectRx(id) {
+      if (confirm(`Reject prescription ${id}?`)) {
+        const rxList = Store.getPrescriptions();
+        const item = rxList.find(r => r.id === id);
+        if (item) {
+          item.status = "Rejected";
+          item.pharmacistNotes = "Rejected: Incomplete dosage information or illegible doctor seal.";
+          Store.savePrescriptions(rxList);
+          showToast(`Prescription ${id} rejected.`, "error");
+          renderAdminDashboard();
+        }
+      }
+    }
+
+    function updateOrderStatus(id, newStatus) {
+      const orders = Store.getOrders();
+      const order = orders.find(o => o.orderId === id);
+      if (order) {
+        order.status = newStatus;
+        Store.saveOrders(orders);
+        showToast(`Order ${id} status updated to ${newStatus}`, "success");
+        renderAdminDashboard();
+      }
+    }
+
+    function adjustStock(id, delta) {
+      const products = getStoredProducts();
+      const p = products.find(prod => prod.id === id);
+      if (p) {
+        p.stockCount = Math.max(0, (p.stockCount || 50) + delta);
+        p.inStock = p.stockCount > 0;
+        saveProducts(products);
+        showToast(`Updated stock for ${p.name} to ${p.stockCount}`, "info");
+        renderAdminDashboard();
+      }
+    }
+
+    function deleteProduct(id) {
+      if (confirm("Are you sure you want to delete this product from the dispensary catalog?")) {
+        let products = getStoredProducts();
+        products = products.filter(p => p.id !== id);
+        saveProducts(products);
+        showToast("Product deleted from catalog.", "info");
+        renderAdminDashboard();
+      }
+    }
+
+    // Modal Add/Edit
+    const pModal = document.getElementById("product-modal");
+    function openAddProductModal() {
+      document.getElementById("modal-product-title").textContent = "Add New Healthcare Product";
+      document.getElementById("product-form").reset();
+      document.getElementById("p-id").value = "";
+      pModal.classList.add("open");
+    }
+
+    function editProduct(id) {
+      const products = getStoredProducts();
+      const p = products.find(prod => prod.id === id);
+      if (p) {
+        document.getElementById("modal-product-title").textContent = "Edit Healthcare Product";
+        document.getElementById("p-id").value = p.id;
+        document.getElementById("p-name").value = p.name;
+        document.getElementById("p-brand").value = p.brand;
+        document.getElementById("p-cat").value = p.category;
+        document.getElementById("p-price").value = p.price;
+        document.getElementById("p-orig").value = p.originalPrice || "";
+        document.getElementById("p-stock").value = p.stockCount;
+        document.getElementById("p-rx").checked = !!p.requiresRx;
+        document.getElementById("p-desc").value = p.description || "";
+        pModal.classList.add("open");
+      }
+    }
+
+    function closeProductModal() {
+      pModal.classList.remove("open");
+    }
+
+    function handleProductSubmit(e) {
+      e.preventDefault();
+      const id = document.getElementById("p-id").value;
+      const products = getStoredProducts();
+
+      if (id) {
+        // Edit existing
+        const p = products.find(prod => prod.id === id);
+        if (p) {
+          p.name = document.getElementById("p-name").value.trim();
+          p.brand = document.getElementById("p-brand").value.trim();
+          p.category = document.getElementById("p-cat").value;
+          p.price = parseFloat(document.getElementById("p-price").value);
+          p.originalPrice = parseFloat(document.getElementById("p-orig").value) || null;
+          p.stockCount = parseInt(document.getElementById("p-stock").value);
+          p.requiresRx = document.getElementById("p-rx").checked;
+          p.description = document.getElementById("p-desc").value.trim();
+          p.inStock = p.stockCount > 0;
+          showToast(`Updated "${p.name}" successfully!`, "success");
+        }
+      } else {
+        // Add new
+        const newId = "med-" + (products.length + 1).toString().padStart(2, '0');
+        const newProduct = {
+          id: newId,
+          name: document.getElementById("p-name").value.trim(),
+          brand: document.getElementById("p-brand").value.trim(),
+          category: document.getElementById("p-cat").value,
+          price: parseFloat(document.getElementById("p-price").value),
+          originalPrice: parseFloat(document.getElementById("p-orig").value) || null,
+          stockCount: parseInt(document.getElementById("p-stock").value),
+          requiresRx: document.getElementById("p-rx").checked,
+          description: document.getElementById("p-desc").value.trim() || "Clinical grade healthcare product.",
+          usage: "Take as directed on packaging.",
+          storage: "Store below 25°C in a dry place.",
+          inStock: true,
+          rating: 4.8,
+          reviews: 1,
+          packSize: "Standard Pack",
+          image: "assets/images/paracetamol-650.webp"
+        };
+        products.push(newProduct);
+        showToast(`Added "${newProduct.name}" to catalog!`, "success");
+      }
+
+      saveProducts(products);
+      closeProductModal();
+      renderAdminDashboard();
+    }
+
+    document.addEventListener("DOMContentLoaded", renderAdminDashboard);
+  </script>
+</body>
+</html>
