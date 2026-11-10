@@ -2883,6 +2883,19 @@ details summary {
   }
 }
 
+/* Responsive Map Container */
+.map-iframe-container {
+  width: 100%;
+  height: 420px;
+}
+
+@media (max-width: 576px) {
+  .map-iframe-container {
+    height: 280px !important;
+  }
+}
+
+
 
 
 
