@@ -214,6 +214,66 @@
               </div>
               <button class="btn btn-rx btn-sm" onclick="switchAdminTab('rx-queue')">Open Rx Queue &rarr;</button>
             </div>
+
+            <!-- SECTION 1: COLD-CHAIN & INVENTORY DIAGNOSTICS -->
+            <section class="dashboard-card" style="margin-bottom:28px;">
+              <h3 style="font-size:1.15rem;font-weight:800;margin-bottom:14px;display:flex;align-items:center;gap:8px;">
+                <svg width="20" height="20" fill="none" stroke="var(--teal-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                Dispensary Environmental & Cold-Chain Sensors
+              </h3>
+              <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));gap:16px;">
+                <div style="background:var(--surface-muted);padding:16px;border-radius:var(--radius-md);border-left:4px solid var(--green-fresh);">
+                  <div style="font-size:0.8rem;color:var(--text-muted);">Biologics Chiller #1</div>
+                  <div style="font-size:1.35rem;font-weight:800;color:var(--green-dark);margin:4px 0;">3.4°C</div>
+                  <span class="badge badge-green" style="font-size:0.7rem;">Optimal (2°C - 8°C)</span>
+                </div>
+                <div style="background:var(--surface-muted);padding:16px;border-radius:var(--radius-md);border-left:4px solid var(--green-fresh);">
+                  <div style="font-size:0.8rem;color:var(--text-muted);">Vaccine Chiller #2</div>
+                  <div style="font-size:1.35rem;font-weight:800;color:var(--green-dark);margin:4px 0;">4.1°C</div>
+                  <span class="badge badge-green" style="font-size:0.7rem;">Optimal (2°C - 8°C)</span>
+                </div>
+                <div style="background:var(--surface-muted);padding:16px;border-radius:var(--radius-md);border-left:4px solid var(--teal-primary);">
+                  <div style="font-size:0.8rem;color:var(--text-muted);">Main Warehouse Floor</div>
+                  <div style="font-size:1.35rem;font-weight:800;color:var(--teal-primary);margin:4px 0;">21.0°C</div>
+                  <span class="badge badge-teal" style="font-size:0.7rem;">Regulated Ambient</span>
+                </div>
+                <div style="background:var(--surface-muted);padding:16px;border-radius:var(--radius-md);border-left:4px solid var(--blue-accent);">
+                  <div style="font-size:0.8rem;color:var(--text-muted);">Relative Humidity</div>
+                  <div style="font-size:1.35rem;font-weight:800;color:var(--blue-accent);margin:4px 0;">42%</div>
+                  <span class="badge badge-blue" style="font-size:0.7rem;">Controlled Dry</span>
+                </div>
+              </div>
+            </section>
+
+            <!-- SECTION 2: OPERATIONAL QUICK ACTIONS -->
+            <section class="dashboard-card" style="margin-bottom:28px;">
+              <h3 style="font-size:1.15rem;font-weight:800;margin-bottom:14px;">Pharmacy Station Operations</h3>
+              <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:14px;">
+                <button onclick="switchAdminTab('products');openAddProductModal();" class="btn btn-outline-dark" style="padding:14px;text-align:left;display:flex;align-items:center;gap:12px;width:100%;justify-content:flex-start;">
+                  <span style="font-size:1.2rem;">📦</span>
+                  <div>
+                    <strong style="font-size:0.875rem;display:block;">Add New Product</strong>
+                    <span style="font-size:0.75rem;color:var(--text-muted);">Create catalog listing</span>
+                  </div>
+                </button>
+
+                <button onclick="switchAdminTab('rx-queue');" class="btn btn-outline-dark" style="padding:14px;text-align:left;display:flex;align-items:center;gap:12px;width:100%;justify-content:flex-start;">
+                  <span style="font-size:1.2rem;">📋</span>
+                  <div>
+                    <strong style="font-size:0.875rem;display:block;">Audit Rx Submissions</strong>
+                    <span style="font-size:0.75rem;color:var(--text-muted);">Approve doctor prescriptions</span>
+                  </div>
+                </button>
+
+                <button onclick="switchAdminTab('orders');" class="btn btn-outline-dark" style="padding:14px;text-align:left;display:flex;align-items:center;gap:12px;width:100%;justify-content:flex-start;">
+                  <span style="font-size:1.2rem;">🚚</span>
+                  <div>
+                    <strong style="font-size:0.875rem;display:block;">Dispatch Orders</strong>
+                    <span style="font-size:0.75rem;color:var(--text-muted);">Courier tracking updates</span>
+                  </div>
+                </button>
+              </div>
+            </section>
           </div>
 
           <!-- TAB 2: MANAGE PRODUCTS -->

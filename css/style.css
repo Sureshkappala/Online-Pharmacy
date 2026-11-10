@@ -2828,5 +2828,61 @@ ul, ol {
   }
 }
 
+/* Mobile Responsive Adjustments for Sections & FAQ */
+details summary::-webkit-details-marker {
+  display: none;
+}
+
+details summary {
+  list-style: none;
+  touch-action: manipulation;
+}
+
+@media (max-width: 640px) {
+  .articles-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 38px 0;
+  }
+  .section-header {
+    margin-bottom: 24px;
+  }
+  .section-title {
+    font-size: 1.45rem;
+    line-height: 1.3;
+  }
+  .section-subtitle {
+    font-size: 0.88rem;
+  }
+}
+
+@media (max-width: 480px) {
+  div[style*="minmax(240px"],
+  div[style*="minmax(250px"],
+  div[style*="minmax(260px"],
+  div[style*="minmax(280px"],
+  div[style*="minmax(300px"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  .faq-item {
+    padding: 14px 16px !important;
+  }
+  
+  .faq-item summary {
+    font-size: 0.95rem !important;
+  }
+  
+  .faq-item p {
+    font-size: 0.86rem !important;
+  }
+}
+
+
 
 

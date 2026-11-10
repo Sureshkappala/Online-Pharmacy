@@ -145,11 +145,58 @@
         <h2 style="font-size:1.75rem;font-weight:800;margin-bottom:8px;">Discounted Healthcare Products</h2>
         <p style="color:var(--text-secondary);margin-bottom:24px;">Quality verified products currently running promotional savings.</p>
 
-        <div id="offers-grid" class="product-grid">
+        <div id="offers-grid" class="product-grid" style="margin-bottom:60px;">
           <!-- Populated by JS -->
         </div>
       </div>
 
+      <!-- SECTION 1: REFILL SUBSCRIPTIONS & WELLNESS REWARDS -->
+      <section style="margin-bottom:60px;background:#ffffff;border:1px solid var(--border-light);border-radius:var(--radius-xl);padding:44px 32px;box-shadow:var(--shadow-sm);">
+        <div class="section-header" style="margin-bottom:32px;">
+          <span class="section-tag">Automatic Savings</span>
+          <h2 class="section-title">Join Stackly Refill Club for Extra Discounts</h2>
+          <p class="section-subtitle">Never run out of daily vitamins, chronic health prescriptions, or diagnostic supplies.</p>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));gap:24px;">
+          <div style="background:var(--surface-muted);border-radius:var(--radius-lg);padding:24px;">
+            <div style="font-size:1.85rem;font-weight:800;color:var(--teal-primary);margin-bottom:6px;">10% Extra</div>
+            <h4 style="font-size:1.05rem;font-weight:700;margin-bottom:8px;">Recurring Refill Savings</h4>
+            <p style="font-size:0.875rem;color:var(--text-secondary);line-height:1.5;">Receive automatic 10% savings on scheduled 30, 60, or 90-day cycles for blood pressure, diabetes, and multivitamin staples.</p>
+          </div>
+
+          <div style="background:var(--surface-muted);border-radius:var(--radius-lg);padding:24px;">
+            <div style="font-size:1.85rem;font-weight:800;color:var(--green-dark);margin-bottom:6px;">$0 Delivery</div>
+            <h4 style="font-size:1.05rem;font-weight:700;margin-bottom:8px;">Free Priority Cold-Chain</h4>
+            <p style="font-size:0.875rem;color:var(--text-secondary);line-height:1.5;">All subscription orders skip standard delivery charges with automated temperature-logged cold packaging.</p>
+          </div>
+
+          <div style="background:var(--surface-muted);border-radius:var(--radius-lg);padding:24px;">
+            <div style="font-size:1.85rem;font-weight:800;color:var(--blue-accent);margin-bottom:6px;">100% Flexible</div>
+            <h4 style="font-size:1.05rem;font-weight:700;margin-bottom:8px;">Pause or Cancel Anytime</h4>
+            <p style="font-size:0.875rem;color:var(--text-secondary);line-height:1.5;">Modify delivery dates, adjust quantities, or swap product formulations directly from your customer dashboard with one click.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 2: PROMOTIONAL TRANSPARENCY & PRESCRIPTION RULES -->
+      <section style="background:var(--surface-muted);border:1px solid var(--border-light);border-radius:var(--radius-xl);padding:36px 32px;margin-bottom:48px;">
+        <h3 style="font-size:1.25rem;font-weight:800;color:var(--text-primary);margin-bottom:12px;">Promotional Terms & Fair Pricing Policy</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:20px;font-size:0.875rem;color:var(--text-secondary);line-height:1.6;">
+          <div>
+            <strong style="color:var(--text-primary);display:block;margin-bottom:4px;">Coupon Stacking Policy</strong>
+            Coupons like <code>HEALTH20</code> and <code>FIRSTMED15</code> cannot be combined on a single order. The promotional engine automatically calculates the maximum possible savings at checkout.
+          </div>
+          <div>
+            <strong style="color:var(--text-primary);display:block;margin-bottom:4px;">Prescription Medicine Regulations</strong>
+            Federal and state laws govern specific prescription drug prices. In compliance with pharmaceutical regulations, coupon discounts apply to OTC supplements, diagnostic devices, and wellness items.
+          </div>
+          <div>
+            <strong style="color:var(--text-primary);display:block;margin-bottom:4px;">Free Shipping Threshold</strong>
+            The $35.00 free shipping minimum is evaluated after coupon discounts are deducted and before handling fees or sales taxes are calculated.
+          </div>
+        </div>
+      </section>
     </div>
   </main>
 

@@ -205,6 +205,55 @@
                 <!-- JS populated -->
               </div>
             </div>
+
+            <!-- SECTION 1: QUICK ACTION HEALTH SHORTCUTS -->
+            <section class="dashboard-card" style="margin-top:20px;">
+              <h3 style="font-size:1.15rem;font-weight:800;margin-bottom:14px;">Healthcare Quick Services</h3>
+              <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));gap:14px;">
+                <a href="prescription-upload.html" style="background:var(--surface-muted);border:1px solid var(--border-light);border-radius:var(--radius-md);padding:14px;display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--text-primary);transition:all var(--transition-fast);">
+                  <div style="width:36px;height:36px;border-radius:8px;background:var(--teal-surface);color:var(--teal-primary);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>
+                  </div>
+                  <div>
+                    <strong style="font-size:0.875rem;display:block;">Upload New Rx</strong>
+                    <span style="font-size:0.75rem;color:var(--text-muted);">Pharmacist review in 15m</span>
+                  </div>
+                </a>
+
+                <a href="my-orders.html" style="background:var(--surface-muted);border:1px solid var(--border-light);border-radius:var(--radius-md);padding:14px;display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--text-primary);transition:all var(--transition-fast);">
+                  <div style="width:36px;height:36px;border-radius:8px;background:var(--blue-light);color:var(--blue-accent);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                  </div>
+                  <div>
+                    <strong style="font-size:0.875rem;display:block;">Auto-Refill Club</strong>
+                    <span style="font-size:0.75rem;color:var(--text-muted);">Save 10% on monthly supplies</span>
+                  </div>
+                </a>
+
+                <a href="products.html?cat=Vitamins%20and%20Nutrition" style="background:var(--surface-muted);border:1px solid var(--border-light);border-radius:var(--radius-md);padding:14px;display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--text-primary);transition:all var(--transition-fast);">
+                  <div style="width:36px;height:36px;border-radius:8px;background:var(--green-surface);color:var(--green-dark);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                  </div>
+                  <div>
+                    <strong style="font-size:0.875rem;display:block;">Daily Wellness</strong>
+                    <span style="font-size:0.75rem;color:var(--text-muted);">Vitamins & clinical devices</span>
+                  </div>
+                </a>
+              </div>
+            </section>
+
+            <!-- SECTION 2: PHARMACIST DIRECT ADVISORY BANNER -->
+            <section class="dashboard-card" style="margin-top:20px;background:linear-gradient(135deg, var(--teal-surface) 0%, #ffffff 100%);border:1px solid var(--teal-border);">
+              <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
+                <div>
+                  <h4 style="font-size:1.05rem;font-weight:800;color:var(--teal-darker);margin-bottom:4px;">Have Questions About Your Medication Schedule?</h4>
+                  <p style="font-size:0.85rem;color:var(--text-secondary);line-height:1.5;">
+                    Your patient profile is assigned to our central clinical dispensary. Consult a doctor of pharmacy for dosage advice or allergy concerns anytime.
+                  </p>
+                </div>
+                <a href="contact.html" class="btn btn-primary btn-sm">Ask a Clinical Pharmacist</a>
+              </div>
+            </section>
           </div>
 
           <!-- TAB 2: MY ORDERS -->
