@@ -27,7 +27,7 @@
       </div>
 
       <div class="auth-header-actions" style="display:flex;align-items:center;gap:10px;">
-        <a href="products.html" class="btn btn-outline-dark btn-sm portal-action-btn" title="Browse Medicines & Health Products">
+        <a href="404.html" class="btn btn-outline-dark btn-sm portal-action-btn" title="Browse Medicines & Health Products">
           <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
           <span class="portal-btn-text">Store Catalog</span>
         </a>
@@ -38,7 +38,7 @@
         </a>
 
         <!-- Hamburger Button -->
-        <button id="hamburger-btn" class="hamburger-btn" onclick="toggleMobileDrawer(event)" aria-label="Toggle navigation drawer" aria-expanded="false">
+        <button id="hamburger-btn" class="hamburger-btn" aria-label="Toggle navigation drawer" aria-expanded="false">
           <span></span>
           <span></span>
           <span></span>
@@ -48,13 +48,13 @@
   </header>
 
   <!-- Mobile Drawer Backdrop & Drawer -->
-  <div id="mobile-backdrop" class="mobile-nav-backdrop" onclick="closeMobileDrawer(event)"></div>
+  <div id="mobile-backdrop" class="mobile-nav-backdrop"></div>
   <aside id="mobile-drawer" class="mobile-nav-drawer" aria-label="Mobile Navigation Drawer">
     <div class="mobile-drawer-header">
       <a href="user-dashboard.html" class="brand-logo" aria-label="Stackly User Dashboard">
         <img src="assets/images/stackly-logo.webp" alt="Stackly" class="navbar-brand-img">
       </a>
-      <button id="mobile-drawer-close" class="mobile-drawer-close" onclick="closeMobileDrawer(event)" aria-label="Close Navigation Menu">&times;</button>
+      <button id="mobile-drawer-close" class="mobile-drawer-close" aria-label="Close Navigation Menu">&times;</button>
     </div>
     <div class="mobile-drawer-links">
       <a href="index.html" class="nav-link">Home</a>
@@ -71,7 +71,7 @@
     </div>
     <div class="mobile-drawer-footer">
       <button onclick="Store.logout()" class="btn btn-outline-danger btn-block" style="margin-bottom:8px;">Sign Out</button>
-      <a href="products.html" class="btn btn-primary btn-block">Shop Catalog</a>
+      <a href="404.html" class="btn btn-primary btn-block">Shop Catalog</a>
     </div>
   </aside>
 
@@ -86,7 +86,7 @@
             <h1 class="page-header-title" style="font-size:1.85rem;" id="user-greeting">Patient Dashboard</h1>
             <p class="page-header-desc" style="font-size:0.95rem;">Manage your health prescriptions, tracking updates, and delivery addresses.</p>
           </div>
-          <a href="prescription-upload.html" class="btn btn-primary btn-sm">
+          <a href="404.html" class="btn btn-primary btn-sm">
             + Upload New Prescription
           </a>
         </div>
@@ -199,7 +199,7 @@
             <div class="dashboard-card">
               <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:8px;">
                 <h3 style="font-size:1.15rem;font-weight:800;">Active Prescriptions Status</h3>
-                <a href="prescription-upload.html" class="btn btn-secondary btn-sm">+ Upload Rx</a>
+                <a href="404.html" class="btn btn-secondary btn-sm">+ Upload Rx</a>
               </div>
               <div id="overview-rx-list">
                 <!-- JS populated -->
@@ -251,7 +251,7 @@
                     Your patient profile is assigned to our central clinical dispensary. Consult a doctor of pharmacy for dosage advice or allergy concerns anytime.
                   </p>
                 </div>
-                <a href="contact.html" class="btn btn-primary btn-sm">Ask a Clinical Pharmacist</a>
+                <a href="404.html" class="btn btn-primary btn-sm">Ask a Clinical Pharmacist</a>
               </div>
             </section>
           </div>
@@ -268,7 +268,7 @@
           <div id="tab-prescriptions" class="dashboard-content-panel">
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:10px;">
               <h2 style="font-size:1.4rem;font-weight:800;">My Uploaded Prescriptions</h2>
-              <a href="prescription-upload.html" class="btn btn-primary btn-sm">+ Upload New Prescription</a>
+              <a href="404.html" class="btn btn-primary btn-sm">+ Upload New Prescription</a>
             </div>
             <div id="tab-rx-container" style="display:flex;flex-direction:column;gap:16px;">
               <!-- Populated by JS -->
@@ -284,7 +284,7 @@
             <div id="empty-wishlist-msg" class="no-results-box" style="display:none;padding:48px 16px;">
               <h3>Your Wishlist is Empty</h3>
               <p style="color:var(--text-secondary);margin:8px 0 16px 0;">Click the heart icon on any medicine card to save it for quick reordering.</p>
-              <a href="products.html" class="btn btn-primary btn-sm">Explore Products</a>
+              <a href="404.html" class="btn btn-primary btn-sm">Explore Products</a>
             </div>
           </div>
 
@@ -292,7 +292,7 @@
           <div id="tab-addresses" class="dashboard-content-panel">
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:10px;">
               <h2 style="font-size:1.4rem;font-weight:800;">Saved Delivery Addresses</h2>
-              <button class="btn btn-secondary btn-sm" onclick="showToast('Address manager demo: Add Address dialog simulated.', 'info')">+ Add New Address</button>
+              <button class="btn btn-secondary btn-sm" onclick="window.location.href='404.html'">+ Add New Address</button>
             </div>
 
             <div class="address-grid">
@@ -327,10 +327,10 @@
           <div id="tab-profile" class="dashboard-content-panel">
             <h2 style="font-size:1.4rem;font-weight:800;margin-bottom:20px;">Patient Health Profile</h2>
             <div class="dashboard-card" style="max-width:640px;">
-              <form onsubmit="event.preventDefault();showToast('Health profile details saved.', 'success');">
+              <form onsubmit="event.preventDefault();window.location.href='404.html';">
                 <div class="form-group">
                   <label class="form-label">Full Legal Name</label>
-                  <input type="text" class="form-control" id="prof-name" value="Alex Morgan">
+                  <input type="text" class="form-control" id="prof-name" value="Alex Morgan" pattern="[A-Za-z\s.'-]{2,}" oninput="this.value = this.value.replace(/[^a-zA-Z\s.'-]/g, '')">
                 </div>
 
                 <div class="dashboard-form-grid-2">
@@ -340,7 +340,7 @@
                   </div>
                   <div class="form-group">
                     <label class="form-label">Phone Number</label>
-                    <input type="tel" class="form-control" id="prof-phone" value="9876543210">
+                    <input type="tel" class="form-control" id="prof-phone" value="9876543210" inputmode="numeric" pattern="[0-9]{10}" maxlength="10" oninput="this.value = this.value.replace(/\D/g, '').slice(0, 10)">
                   </div>
                 </div>
 
@@ -354,7 +354,7 @@
                   <textarea class="form-control" rows="2" placeholder="Hypertension, asthma, diabetes management notes...">Mild seasonal rhinitis.</textarea>
                 </div>
 
-                <button type="submit" class="btn btn-primary" style="width:100%;max-width:240px;">Save Profile Changes</button>
+                <button type="button" onclick="window.location.href='404.html'" class="btn btn-primary" style="width:100%;max-width:240px;">Save Profile Changes</button>
               </form>
             </div>
           </div>

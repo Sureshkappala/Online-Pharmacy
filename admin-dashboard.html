@@ -67,13 +67,13 @@
       </div>
 
       <div class="auth-header-actions" style="display:flex;align-items:center;gap:10px;">
-        <a href="products.html" class="btn btn-outline-dark btn-sm portal-action-btn" title="View Storefront Catalog">
+        <a href="404.html" class="btn btn-outline-dark btn-sm portal-action-btn" title="View Storefront Catalog">
           <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
           <span class="portal-btn-text">Store Catalog</span>
         </a>
 
         <!-- Hamburger Button -->
-        <button id="hamburger-btn" class="hamburger-btn" onclick="toggleMobileDrawer(event)" aria-label="Toggle navigation drawer" aria-expanded="false">
+        <button id="hamburger-btn" class="hamburger-btn" aria-label="Toggle navigation drawer" aria-expanded="false">
           <span></span>
           <span></span>
           <span></span>
@@ -83,13 +83,13 @@
   </header>
 
   <!-- Mobile Drawer Backdrop & Drawer -->
-  <div id="mobile-backdrop" class="mobile-nav-backdrop" onclick="closeMobileDrawer(event)"></div>
+  <div id="mobile-backdrop" class="mobile-nav-backdrop"></div>
   <aside id="mobile-drawer" class="mobile-nav-drawer" aria-label="Mobile Navigation Drawer">
     <div class="mobile-drawer-header">
       <a href="admin-dashboard.html" class="brand-logo" aria-label="Stackly Admin Dashboard">
         <img src="assets/images/stackly-logo.webp" alt="Stackly" class="navbar-brand-img">
       </a>
-      <button id="mobile-drawer-close" class="mobile-drawer-close" onclick="closeMobileDrawer(event)" aria-label="Close Navigation Menu">&times;</button>
+      <button id="mobile-drawer-close" class="mobile-drawer-close" aria-label="Close Navigation Menu">&times;</button>
     </div>
     <div class="mobile-drawer-links">
       <a href="index.html" class="nav-link">Home</a>
@@ -106,7 +106,7 @@
     </div>
     <div class="mobile-drawer-footer">
       <button onclick="Store.logout()" class="btn btn-outline-danger btn-block" style="margin-bottom:8px;">Sign Out</button>
-      <a href="products.html" class="btn btn-primary btn-block">Storefront Catalog</a>
+      <a href="404.html" class="btn btn-primary btn-block">Storefront Catalog</a>
     </div>
   </aside>
 
@@ -212,7 +212,7 @@
                 </strong>
                 <p style="font-size:0.875rem;color:#9f1239;margin-top:2px;">There are pending customer prescriptions awaiting doctor verification.</p>
               </div>
-              <button class="btn btn-rx btn-sm" onclick="switchAdminTab('rx-queue')">Open Rx Queue &rarr;</button>
+              <button class="btn btn-rx btn-sm" onclick="window.location.href='404.html'">Open Rx Queue &rarr;</button>
             </div>
 
             <!-- SECTION 1: COLD-CHAIN & INVENTORY DIAGNOSTICS -->
@@ -249,7 +249,7 @@
             <section class="dashboard-card" style="margin-bottom:28px;">
               <h3 style="font-size:1.15rem;font-weight:800;margin-bottom:14px;">Pharmacy Station Operations</h3>
               <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:14px;">
-                <button onclick="switchAdminTab('products');openAddProductModal();" class="btn btn-outline-dark" style="padding:14px;text-align:left;display:flex;align-items:center;gap:12px;width:100%;justify-content:flex-start;">
+                <button onclick="window.location.href='404.html'" class="btn btn-outline-dark" style="padding:14px;text-align:left;display:flex;align-items:center;gap:12px;width:100%;justify-content:flex-start;">
                   <span style="font-size:1.2rem;">📦</span>
                   <div>
                     <strong style="font-size:0.875rem;display:block;">Add New Product</strong>
@@ -257,7 +257,7 @@
                   </div>
                 </button>
 
-                <button onclick="switchAdminTab('rx-queue');" class="btn btn-outline-dark" style="padding:14px;text-align:left;display:flex;align-items:center;gap:12px;width:100%;justify-content:flex-start;">
+                <button onclick="window.location.href='404.html'" class="btn btn-outline-dark" style="padding:14px;text-align:left;display:flex;align-items:center;gap:12px;width:100%;justify-content:flex-start;">
                   <span style="font-size:1.2rem;">📋</span>
                   <div>
                     <strong style="font-size:0.875rem;display:block;">Audit Rx Submissions</strong>
@@ -265,7 +265,7 @@
                   </div>
                 </button>
 
-                <button onclick="switchAdminTab('orders');" class="btn btn-outline-dark" style="padding:14px;text-align:left;display:flex;align-items:center;gap:12px;width:100%;justify-content:flex-start;">
+                <button onclick="window.location.href='404.html'" class="btn btn-outline-dark" style="padding:14px;text-align:left;display:flex;align-items:center;gap:12px;width:100%;justify-content:flex-start;">
                   <span style="font-size:1.2rem;">🚚</span>
                   <div>
                     <strong style="font-size:0.875rem;display:block;">Dispatch Orders</strong>
@@ -280,7 +280,7 @@
           <div id="adm-products" class="dashboard-content-panel">
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:12px;">
               <h2 style="font-size:1.4rem;font-weight:800;">Catalog Management</h2>
-              <button class="btn btn-primary btn-sm" onclick="openAddProductModal()">+ Add New Product</button>
+              <button class="btn btn-primary btn-sm" onclick="window.location.href='404.html'">+ Add New Product</button>
             </div>
 
             <div class="table-scroll-hint">
@@ -527,8 +527,8 @@
           <td>${p.requiresRx ? '<span class="badge badge-rx">Rx Required</span>' : '<span class="badge badge-green">OTC</span>'}</td>
           <td><strong>${p.stockCount}</strong></td>
           <td>
-            <button class="btn btn-sm btn-outline-dark" onclick="editProduct('${p.id}')">Edit</button>
-            <button class="btn btn-sm" style="color:var(--rx-red);" onclick="deleteProduct('${p.id}')">Delete</button>
+            <button class="btn btn-sm btn-outline-dark" onclick="window.location.href='404.html'">Edit</button>
+            <button class="btn btn-sm" style="color:var(--rx-red);" onclick="window.location.href='404.html'">Delete</button>
           </td>
         </tr>
       `).join('');
@@ -546,8 +546,8 @@
           <td><span class="badge ${r.status === 'Verified' ? 'badge-green' : 'badge-amber'}">${r.status}</span></td>
           <td>
             ${r.status === 'Pending Review' ? `
-              <button class="btn btn-sm btn-success" onclick="approveRx('${r.id}')">Approve Rx</button>
-              <button class="btn btn-sm" style="color:var(--rx-red);" onclick="rejectRx('${r.id}')">Reject</button>
+              <button class="btn btn-sm btn-success" onclick="window.location.href='404.html'">Approve Rx</button>
+              <button class="btn btn-sm" style="color:var(--rx-red);" onclick="window.location.href='404.html'">Reject</button>
             ` : '<span style="color:var(--green-dark);font-weight:700;">Audited ✓</span>'}
           </td>
         </tr>
@@ -584,8 +584,8 @@
               : '<span class="badge badge-green">Healthy</span>'}
           </td>
           <td>
-            <button class="btn btn-sm btn-outline-dark" onclick="adjustStock('${p.id}', -10)">-10</button>
-            <button class="btn btn-sm btn-outline-dark" onclick="adjustStock('${p.id}', 25)">+25</button>
+            <button class="btn btn-sm btn-outline-dark" onclick="window.location.href='404.html'">-10</button>
+            <button class="btn btn-sm btn-outline-dark" onclick="window.location.href='404.html'">+25</button>
           </td>
         </tr>
       `).join('');

@@ -2795,17 +2795,20 @@ ul, ol {
   .auth-minimal-header .portal-action-btn,
   .auth-minimal-header .nav-action-btn {
     padding: 6px 8px !important;
-    width: 34px !important;
-    height: 34px !important;
+    width: 38px !important;
+    height: 38px !important;
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
   }
   .auth-minimal-header .hamburger-btn {
-    width: 34px !important;
-    height: 34px !important;
+    width: 38px !important;
+    height: 38px !important;
     padding: 8px !important;
     margin-right: 0 !important;
+    touch-action: manipulation;
+    position: relative;
+    z-index: 20;
   }
 }
 
